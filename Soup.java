@@ -36,7 +36,7 @@ public class Soup {
 
     //Use Math.random() to get a random character from the letters string and return it.
     public char randomLetter(){
-        char randomLetter = letters.charAt(Math.random () * letters.length);
+        char randomLetter = letters.charAt((int)(Math.random () * letters.length ()));
         return randomLetter;
     }
 
@@ -44,7 +44,7 @@ public class Soup {
     //returns the letters currently stored with the company name placed directly in the center of all
     //the letters
     public String companyCentered(){
-        String companyCentered = letters.substring (0,(letters.length /2)) + company + letters.substring ((letters.length/2),letters.length);
+        String companyCentered = letters.substring (0,(letters.length () /2)) + company + letters.substring ((letters.length ()/2),letters.length());
         return companyCentered;
     }
 
@@ -56,7 +56,11 @@ public class Soup {
 
     //should remove "num" letters from a random spot in the string letters. You may assume num never exceeds the length of the string.
     public void removeSome(int num){
-
+        num = (int)(Math.random () *letters.length());
+        int startingInterval = (int)(Math.random()*letters.length());
+        int endingInterval = (int)(Math.random()*letters.length())+num-1;
+        letters= letters.substring(0,startingInterval) +letters.substring(endingInterval,letters.length());
+        
     }
 
     //should remove the word "word" from the string letters. If the word is not found in letters then it does nothing.
