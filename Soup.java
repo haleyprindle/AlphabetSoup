@@ -51,20 +51,26 @@ public class Soup {
 
     //should remove the first available vowel from letters. If there are no vowels this method has no effect.
     public void removeFirstVowel(){
-        
+      letters = letters.replaceFirst("[AUIOUaeiou]", "");  
     }
 
     //should remove "num" letters from a random spot in the string letters. You may assume num never exceeds the length of the string.
     public void removeSome(int num){
-        num = (int)(Math.random () *letters.length());
-        int startingInterval = (int)(Math.random()*letters.length());
-        int endingInterval = (int)(Math.random()*letters.length())+num-1;
-        letters= letters.substring(0,startingInterval) +letters.substring(endingInterval,letters.length());
-        
+        int startingIndex = (int)(Math.random()*(letters.length())-num)+1;
+        int endingIndex = startingIndex+num-1;
+        letters= letters.substring(0, startingIndex+1) + letters.substring(endingIndex+1);
     }
 
     //should remove the word "word" from the string letters. If the word is not found in letters then it does nothing.
     public void removeWord(String word){
-        
+        String tempString = "";
+        int  searchStart = 0;
+        int findLocation=-1;
+        while((findLocation = letters.indexOf(word, searchStart))>= 0){    
+         tempString += letters.substring(searchStart,findLocation);
+         searchStart=findLocation+word.length();
+        }
+        if(findLocation >= 0)
+            letters = tempString;
     }
 }
